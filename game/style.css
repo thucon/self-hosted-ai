@@ -1,0 +1,100 @@
+body {
+    font-family: 'Courier New', Courier, monospace;
+    background-color: #1a1a1a;
+    color: #e0e0e0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+#game-container {
+    background-color: #2c2c2c;
+    border: 3px solid #555;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    max-width: 800px;
+    width: 90%;
+}
+
+h1 {
+    text-align: center;
+    color: #ff6b6b; /* Dungeon red */
+    border-bottom: 2px solid #444;
+    padding-bottom: 10px;
+    margin-top: 0;
+}
+
+/* Story Area Styling */
+#story-area {
+    background-color: #3a3a3a;
+    padding: 15px;
+    border: 1px solid #444;
+    min-height: 200px;
+    margin-bottom: 20px;
+    overflow-y: auto; /* Allows scrolling if story gets too long */
+}
+
+#story-area p {
+    line-height: 1.6;
+    margin-bottom: 1em;
+}
+
+/* Status Bar Styling */
+#status-bar {
+    display: flex;
+    justify-content: space-around;
+    background-color: #222;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    font-size: 1.1em;
+}
+
+#status-bar p {
+    margin: 0;
+}
+
+/* Input Area Styling */
+#input-area {
+    text-align: center;
+    padding: 15px;
+    border: 1px solid #444;
+    background-color: #3a3a3a;
+    margin-bottom: 20px;
+}
+
+#input-area h2 {
+    color: #b8e986; /* Green for actions */
+    margin-top: 0;
+}
+
+.action-btn {
+    background-color: #5c3d1a; /* Brown/earthy tone */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s, transform 0.1s;
+}
+
+.action-btn:hover {
+    background-color: #7a5c2d;
+    transform: translateY(-1px);
+}
+
+/* Message Log Styling */
+#message-log {
+    padding: 10px;
+    border: 1px dashed #444;
+    min-height: 50px;
+    background-color: #222;
+    font-size: 0.9em;
+}
+
+/* Utility classes for emphasis */
+.danger { color: #ff6b6b; }
+.success { color: #b8e986; }

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Old School Dungeon Crawler</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="game-container">
+        <h1>The Dungeon Crawl</h1>
+        <div id="story-area">
+            <!-- Game story and descriptions will appear here -->
+            <p class="initial-message">You awaken in a damp, stone chamber. The air smells of mildew and forgotten things. You must find your way out.</p>
+        </div>
+
+        <div id="status-bar">
+            <p>Location: <span id="location-name">Unknown</span></p>
+            <p>Health: <span id="health-display">10</span>/<span id="max-health">10</span></p>
+            <p>Time Remaining: <span id="time-remaining">10:00</span></p>
+        </div>
+
+        <div id="input-area">
+            <h2>Actions</h2>
+            <button class="action-btn" onclick="handleAction('look')">Look Around</button>
+            <button class="action-btn" onclick="handleAction('move_north')">Go North</button>
+            <button class="action-btn" onclick="handleAction('inventory')">Check Inventory</button>
+        </div>
+
+        <div id="message-log">
+            <!-- System messages will appear here -->
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>

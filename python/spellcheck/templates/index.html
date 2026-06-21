@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LLM Spell Checker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f7f9;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 800px;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #555;
+        }
+        textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 16px;
+            resize: vertical;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+            display: block;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #outputContainer {
+            margin-top: 30px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: #e9ecef;
+        }
+        #correctedText {
+            white-space: pre-wrap; /* Preserve formatting and line breaks */
+            font-size: 16px;
+            min-height: 50px;
+            padding: 10px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+        }
+        .loading {
+            text-align: center;
+            color: #888;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📚 LLM Spell Checker</h1>
+
+        <label for="inputText">Enter text to spellcheck:</label>
+        <textarea id="inputText" rows="8" placeholder="Type or paste your text here..."></textarea>
+
+        <button onclick="spellCheckText()">Spell Check & Correct</button>
+
+        <div class="loading" id="loadingMessage" style="display: none;">Checking spelling and grammar with the LLM... Please wait.</div>
+
+        <h2>✅ Corrected Output</h2>
+        <div id="outputContainer">
+            <p id="correctedText">Your corrected text will appear here.</p>
+        </div>
+    </div>
+
+    <script>
+        async function spellCheckText() {
+            const inputText = document.getElementById('inputText').value;
+            const loadingMessage = document.getElementById('loadingMessage');
+            const outputElement = document.getElementById('correctedText');
+
+            if (!inputText.trim()) {
+                outputElement.textContent = "Please enter some text to check.";
+                return;
+            }
+
+            // Show loading state and disable button
+            document.querySelector('button').disabled = true;
+            loadingMessage.style.display = 'block';
+            outputElement.textContent = '';
+
+            try {
+                const response = await fetch('/spellcheck', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ text: inputText })
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    outputElement.textContent = data.corrected_text;
+                } else {
+                    outputElement.textContent = `Error: ${data.error || 'Unknown error occurred.'}`;
+                }
+            } catch (error) {
+                console.error('Fetch error:', error);
+                outputElement.textContent = `Network or server connection error: ${error.message}. Ensure the LLM server is running at 192.168.1.158:1234.`;
+            } finally {
+                // Hide loading state and re-enable button
+                loadingMessage.style.display = 'none';
+                document.querySelector('button').disabled = false;
+            }
+        }
+    </script>
+</body>
+</html>

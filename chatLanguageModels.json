@@ -1,0 +1,18 @@
+[
+	{
+		"name": "My Custom Models",
+		"vendor": "customendpoint",
+		"apiType": "chat-completions",
+		"models": [
+			{
+				"id": "google/gemma-4-e4b",
+				"name": "google/gemma-4-e4b",
+				"url": "http://192.168.1.157:1234",
+				"toolCalling": true,
+				"vision": true,
+				"maxInputTokens": 60000,
+				"maxOutputTokens": 16000
+			}
+		]
+	}
+]
